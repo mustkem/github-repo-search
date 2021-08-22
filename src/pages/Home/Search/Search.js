@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
 import httpInstance from "../../../helpers/httpClient";
 
@@ -12,6 +12,7 @@ function Search() {
   const [searchField, setSearchField] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchResultModel, setSearchResultModel] = useState(false);
+  const [timeoutInstance, setTimeoutInstance] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,13 @@ function Search() {
   };
 
   useEffect(() => {
-    getRepos();
+    clearTimeout(timeoutInstance);
+    if (!searchField) {
+      setSearchResults([]);
+    } else {
+      setTimeoutInstance(setTimeout(() => getRepos(), 300));
+    }
+    return () => clearTimeout(timeoutInstance);
   }, [searchField]);
 
   return (
@@ -61,7 +68,6 @@ function Search() {
       <div>
         <h2>Search Repos</h2>
       </div>
-      
       <div>
         <Form.Control
           value={searchField}
