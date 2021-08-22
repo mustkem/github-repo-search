@@ -51,7 +51,7 @@ const initialState = {
   ],
 };
 
-const todos = (state = initialState, action) => {
+const repos = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_REPO:
       return {
@@ -68,4 +68,4 @@ const todos = (state = initialState, action) => {
   }
 };
 
-export default todos;
+export default repos;
