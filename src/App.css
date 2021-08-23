@@ -12,9 +12,20 @@
 }
 
 .header {
-  background-color: aliceblue;
-  padding: 30px 0;
+  background-color: #24292e;
+  padding: 20px 0;
   text-align: center;
+  color: white;
+}
+
+.header a {
+  color: white;
+  padding: 7px 15px;
+}
+
+.header a:hover {
+  color: black;
+  background-color: white;
 }
 
 .footer {
@@ -23,13 +34,29 @@
   text-align: center;
 }
 
-a{
+a {
   font-size: 22px;
   color: blue;
   text-decoration: none;
   font-weight: 500;
 }
-
-label{
+label {
   color: gray;
+}
+.flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.h-200 {
+  height: 200px;
+}
+
+.center {
+  padding: 30px;
+  text-align: center;
 }

@@ -56,7 +56,7 @@ const repos = (state = initialState, action) => {
     case types.ADD_REPO:
       return {
         ...state,
-        data: [...state.data, action.message],
+        data: [action.message, ...state.data],
       };
     case types.DELETE_REPO:
       return {

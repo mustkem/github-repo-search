@@ -16,7 +16,7 @@ function Auth() {
 
     axios({
       method: "post",
-      url: `http://localhost:5000/authenticate`,
+      url: `https://github-auth-api.herokuapp.com/authenticate`,
       data: {
         code,
       },
@@ -24,14 +24,20 @@ function Auth() {
       .then((res) => {
         localStorage.setItem("access_token_github", res.data.access_token);
         dispatch(onFetchUser(res.data));
-        history.push("/");
+        history.replace("/");
       })
       .catch((err) => {
         //TODO: Show error message in UI
-        history.push("/login");
+        history.replace("/login");
       });
   }, []);
-  return <div className="container">login in progress...</div>;
+  return (
+    <div className="container">
+      <div className="flex justify-center align-center h-200">
+        Please wait... authentication is in progress.
+      </div>
+    </div>
+  );
 }
 
 export default Auth;

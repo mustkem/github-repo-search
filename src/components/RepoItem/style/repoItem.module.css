@@ -1,9 +1,5 @@
 .item {
-  padding: 24px 0;
-  border-bottom: 1px solid lightgray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 24px 12px;
   border-bottom: 1px solid #ebedef;
 }
 
@@ -15,15 +11,20 @@
   display: blocks;
 }
 
-.title{
-    display: block;
+.title {
+  display: block;
 }
-.section{
-    padding:10px 10px 10px 0;
+.section {
+  padding: 10px 10px 10px 0;
 }
-.smallLink{
-    font-size: 15px;
-    padding:7px;
-    margin:0 15px;
-    display: inline-block;
+.smallLink {
+  font-size: 15px;
+  padding: 7px;
+  margin: 0 15px;
+  display: inline-block;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
 }

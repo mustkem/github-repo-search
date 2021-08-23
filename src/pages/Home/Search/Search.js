@@ -1,26 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 
-import httpInstance from "../../../helpers/httpClient";
-
+import RepoItem from "../../../components/RepoItem";
 import { addRepo } from "../../../store/actions";
 
-import RepoItem from "../../../components/RepoItem";
+import useSearch from "../../../components/useSearch";
 
 function Search() {
-  const [searchField, setSearchField] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchResultModel, setSearchResultModel] = useState(false);
-  const [timeoutInstance, setTimeoutInstance] = useState(null);
+  const [query, setQuery] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const { items, hasMore, loading, error } = useSearch(query, pageNumber);
 
   const dispatch = useDispatch();
 
   let repos = useSelector((state) => state.repos.data);
-
-  const handleChange = (e) => {
-    setSearchField(e.target.value);
-  };
 
   const getIsAdded = (id) => {
     var i;
@@ -36,88 +31,71 @@ function Search() {
     dispatch(addRepo(item));
   };
 
-  const getRepos = () => {
-    httpInstance({
-      method: "get",
-      url: `/search/repositories?q=${searchField}`,
-      headers: {
-        accept: "application/vnd.github.v3+json",
-      },
-    })
-      .then((res) => {
-        setSearchResultModel(true);
-        setSearchResults(res.data.items);
-      })
-      .catch((err) => {
-        console.log(err);
+  const scrollRef = useRef();
+  const lastElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (scrollRef.current) scrollRef.current.disconnect();
+      scrollRef.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
       });
-  };
+      if (node) scrollRef.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
-  useEffect(() => {
-    clearTimeout(timeoutInstance);
-    if (!searchField) {
-      setSearchResults([]);
-    } else {
-      setTimeoutInstance(setTimeout(() => getRepos(), 300));
-    }
-    return () => clearTimeout(timeoutInstance);
-  }, [searchField]);
+  function handleSearch(e) {
+    setQuery(e.target.value);
+    setPageNumber(1);
+  }
 
   return (
     <div>
-      <div>
-        <h2>Search Repos</h2>
-      </div>
-      <div>
-        <Form.Control
-          value={searchField}
-          type="search"
-          placeholder="Search Repos"
-          onChange={handleChange}
-        />
-        {searchResultModel && (
-          <div style={{ position: "relative" }}>
-            <ul
-              style={{
-                padding: 20,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                height: "300px",
-                overflow: "auto",
-                background: "aliceblue",
-                width: "100%",
-                border: "1px solid lightgray",
-              }}
-            >
-              {searchResults.map((item) => {
-                const isAdded = getIsAdded(item.id);
-                return (
-                  <RepoItem
-                    isAdded={isAdded}
-                    canAdd
-                    item={item}
-                    key={item.id}
-                    addRepo={handleAddRepo}
-                  />
-                );
-              })}
-            </ul>
-            <button
-              style={{
-                padding: 7,
-                position: "absolute",
-                top: 0,
-                right: 0,
-              }}
-              onClick={() => {
-                setSearchResultModel(!searchResultModel);
-              }}
-            >
-              Close
-            </button>
+      <h2 style={{ padding: "25px 0" }}>Search Repos</h2>
+      <Form.Control
+        type="search"
+        placeholder="Search Repos"
+        value={query}
+        onChange={handleSearch}
+      />
+      <div style={{ height: 400, overflow: "auto" }}>
+        <div>
+          {items.map((item, index) => {
+            const isAdded = getIsAdded(item.id);
+            if (items.length === index + 1) {
+              return (
+                <RepoItem
+                  ref={lastElementRef}
+                  isAdded={isAdded}
+                  canAdd
+                  item={item}
+                  key={item.id}
+                  addRepo={handleAddRepo}
+                />
+              );
+            } else {
+              return (
+                <RepoItem
+                  isAdded={isAdded}
+                  canAdd
+                  item={item}
+                  key={item.id}
+                  addRepo={handleAddRepo}
+                />
+              );
+            }
+          })}
+          <div style={{ padding: 10, textAlign: "center", minHeight: 50 }}>
+            {loading && "Loading..."}
+            {error && "Error"}
+            {!loading &&
+              !error &&
+              items.length === 0 &&
+              "Enter Repository name to search"}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
