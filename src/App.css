@@ -60,3 +60,12 @@ label {
   padding: 30px;
   text-align: center;
 }
+
+h3 {
+  margin-bottom: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}

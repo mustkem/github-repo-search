@@ -10,10 +10,13 @@ export default function useSearch(query, pageNumber) {
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
+    console.log("use did");
     setItems([]);
   }, [query]);
 
   useEffect(() => {
+    console.log("use did api");
+
     if (!query) {
       return false;
     }

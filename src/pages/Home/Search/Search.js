@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 
@@ -9,6 +9,9 @@ import useSearch from "../../../components/useSearch";
 
 function Search() {
   const [query, setQuery] = useState("");
+  const [actionQuery, setAtionQuery] = useState("");
+  const [timeoutInstance, setTimeoutInstance] = useState(null);
+
   const [pageNumber, setPageNumber] = useState(1);
 
   const { items, hasMore, loading, error } = useSearch(query, pageNumber);
@@ -47,9 +50,18 @@ function Search() {
   );
 
   function handleSearch(e) {
-    setQuery(e.target.value);
-    setPageNumber(1);
+    setAtionQuery(e.target.value);
   }
+
+  useEffect(() => {
+    clearTimeout(timeoutInstance);
+    const instance = setTimeout(() => {
+      setQuery(actionQuery);
+      setPageNumber(1);
+    }, 200);
+    setTimeoutInstance(instance);
+    return () => clearTimeout(timeoutInstance);
+  }, [actionQuery]);
 
   return (
     <div>
@@ -57,7 +69,7 @@ function Search() {
       <Form.Control
         type="search"
         placeholder="Search Repos"
-        value={query}
+        value={actionQuery}
         onChange={handleSearch}
       />
       <div style={{ height: 400, overflow: "auto" }}>

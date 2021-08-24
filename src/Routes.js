@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Project from "./Project";
+import Project from "./pages/Repository";
 import Login from "./pages/Login";
 import Auth from "./pages/Auth";
 
