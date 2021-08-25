@@ -25,7 +25,7 @@ function App() {
           <Header />
           {!loading && <Routes isAuthenticated={isAuthenticated} />}
         </div>
-        <footer className="footer">Copyright@2021</footer>
+        <footer className="footer">copyright@2021</footer>
       </Router>
     </div>
   );

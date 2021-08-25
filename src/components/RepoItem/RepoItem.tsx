@@ -13,7 +13,7 @@ const RepoItem = memo(
       externalRef: React.LegacyRef<HTMLLIElement>
     ): JSX.Element => {
       return (
-        <li ref={externalRef} className={Style.item}>
+        <li ref={externalRef} className={Style.item} aria-label="repo-item">
           <Link className={Style.link} to={`/repos/${item.full_name}`}>
             {item.full_name}
           </Link>
@@ -26,10 +26,10 @@ const RepoItem = memo(
                     <span>{item.language}</span>
                   </div>
                 )}
-                {item.owner.login && (
+                {item.owner?.login && (
                   <div className={Style.section}>
                     <label className={Style.title}>Owner</label>
-                    <span>{item.owner.login}</span>
+                    <span>{item.owner?.login}</span>
                   </div>
                 )}
               </div>

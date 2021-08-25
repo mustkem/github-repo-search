@@ -1,16 +1,13 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 
 import RepoItem from "../../../components/RepoItem";
-import { addRepo } from "../../../store/actions";
 
 import useSearch from "../../../components/useSearch";
 import Style from "../style/home.module.css";
 
 const getIsAdded = (id: string, repos: any) => {
-  var i;
-  for (i = 0; i < repos.length; i++) {
+  for (let i = 0; i < repos.length; i++) {
     if (repos[i].id === id) {
       return true;
     }
@@ -18,7 +15,12 @@ const getIsAdded = (id: string, repos: any) => {
   return false;
 };
 
-const Search = (): JSX.Element => {
+type SearchProps = {
+  addRepo: (payload: any) => void;
+  repos: any;
+};
+
+const Search = ({ addRepo, repos }: SearchProps): JSX.Element => {
   const [query, setQuery] = useState<string>("");
   const [actionQuery, setAtionQuery] = useState<string>("");
   const [timeoutInstance, setTimeoutInstance] = useState<any>(null);
@@ -27,12 +29,8 @@ const Search = (): JSX.Element => {
 
   const { items, hasMore, loading, error } = useSearch(query, pageNumber);
 
-  const dispatch = useDispatch();
-
-  let repos = useSelector((state: any) => state.repos.data);
-
   const handleAddRepo = (item: any) => {
-    dispatch(addRepo(item));
+    addRepo(item);
   };
 
   const scrollRef: any = useRef();
@@ -70,13 +68,15 @@ const Search = (): JSX.Element => {
       <Form.Control
         type="search"
         placeholder="Search Repos"
+        aria-label="search-repos"
         value={actionQuery}
         onChange={handleSearch}
       />
       <div className={Style.container}>
         <div>
           {items.map((item: any, index) => {
-            const isAdded = getIsAdded(item.id, repos);
+            const isAdded = getIsAdded(item.id, repos.data);
+
             if (items.length === index + 1) {
               return (
                 <RepoItem
@@ -102,10 +102,9 @@ const Search = (): JSX.Element => {
           <div className={Style.loading}>
             {loading && "Loading..."}
             {error && "Error"}
-            {!loading &&
-              !error &&
-              items.length === 0 &&
-              "Enter Repository name to search"}
+            {!loading && !error && items.length === 0 && (
+              <div id="search-repo-place">Enter Repository name to search</div>
+            )}
           </div>
         </div>
       </div>

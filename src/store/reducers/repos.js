@@ -6,7 +6,7 @@ const initialState = {
       id: 254747765,
       node_id: "MDEwOlJlcG9zaXRvcnkyNTQ3NDc3NjU=",
       name: "React-Flashcard-App",
-      full_name: "WebDevSimplified/React-Flashcard-App",
+      full_name: "WebDevSimplified/React-Flashcard- Static Sample",
       private: false,
       owner: {
         login: "WebDevSimplified",

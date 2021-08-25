@@ -1,27 +1,24 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { deleteRepo } from "../../store/actions";
-
 import Search from "./Search";
 import RepoItem from "../../components/RepoItem";
 
 import Style from "./style/home.module.css";
 
-const Home = (): JSX.Element => {
-  const dispatch = useDispatch();
+type HomeProps = {
+  addRepo: (payload: any) => void;
+  deleteRepo: (payload: any) => void;
+  repos: any;
+};
 
-  const repos = useSelector((state: any) => state.repos);
-
+const Home = ({ addRepo, deleteRepo, repos }: HomeProps): JSX.Element => {
   const handleDeleteRepo = (id: string) => {
-    dispatch(deleteRepo(id));
+    deleteRepo(id);
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 col-xs-12">
-          <Search />
+          <Search addRepo={addRepo} repos={repos} />
         </div>
         <div className="col-md-6 col-xs-12">
           <div>

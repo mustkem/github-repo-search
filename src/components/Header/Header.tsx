@@ -1,10 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+type HeaderProps = {
+  user: any;
+};
 
-function Header() {
-  const user = useSelector((state: any) => state.user.data);
+function Header({ user }: HeaderProps) {
   return (
     <header className="header">
       <div className="container">
