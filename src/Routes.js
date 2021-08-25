@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Project from "./pages/Repository";
-import Login from "./pages/Login";
-import Auth from "./pages/Auth";
+const Home = lazy(() => import("./pages/Home"));
+const Repo = lazy(() => import("./pages/Repository"));
+const Login = lazy(() => import("./pages/Login"));
+const Auth = lazy(() => import("./pages/Auth"));
 
 function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
   return (
@@ -22,26 +22,27 @@ function PrivateRoute({ component: Component, isAuthenticated, ...rest }) {
 }
 
 function Routes({ isAuthenticated }) {
-  console.log(isAuthenticated, "isAuthenticatedqqqqqqqq");
   return (
-    <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/auth">
-        <Auth />
-      </Route>
-      <PrivateRoute
-        isAuthenticated={isAuthenticated}
-        path="/projects/:owner/:name"
-        component={Project}
-      />
-      <PrivateRoute
-        isAuthenticated={isAuthenticated}
-        path="/"
-        component={Home}
-      />
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          path="/repos/:owner/:name"
+          component={Repo}
+        />
+        <PrivateRoute
+          isAuthenticated={isAuthenticated}
+          path="/"
+          component={Home}
+        />
+      </Switch>
+    </Suspense>
   );
 }
 

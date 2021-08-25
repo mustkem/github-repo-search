@@ -1,20 +1,27 @@
 import React from "react";
-import axios from "axios";
 import Issue from "./Issue";
+import httpInstance from "../../../../helpers/httpClient";
 
 import Style from "../../style/repo.module.css";
 
-function Project({ owner, name }) {
+const PER_PAGE_ITEMS: number = 5;
+
+type IssuesProps = {
+  owner: String;
+  name: string;
+};
+
+const Issues = ({ owner, name }: IssuesProps): JSX.Element => {
   const [issues, setIssues] = React.useState([]);
   React.useEffect(() => {
-    axios({
+    httpInstance({
       method: "get",
-      url: `https://api.github.com/repos/${owner}/${name}/issues`,
+      url: `/repos/${owner}/${name}/issues`,
       headers: {
         accept: "application/vnd.github.v3+json",
       },
       params: {
-        per_page: 5,
+        per_page: PER_PAGE_ITEMS, // latest 5 only
       },
     })
       .then((res) => {
@@ -30,14 +37,22 @@ function Project({ owner, name }) {
       <h3>Latest Issues</h3>
       {issues?.length > 0 && (
         <ul className={Style.list}>
-          {issues.map((item) => {
-            return <Issue key={item.sha} item={item} />;
+          {issues.map((item: any) => {
+            return (
+              <Issue
+                key={item.sha}
+                html_url={item.html_url}
+                title={item.title}
+                user={item.user.login}
+                state={item.state}
+              />
+            );
           })}
         </ul>
       )}
       {issues?.length === 0 && <h4>No Records available</h4>}
     </>
   );
-}
+};
 
-export default Project;
+export default Issues;

@@ -22,7 +22,9 @@
   color: white;
   padding: 7px 15px;
 }
-
+a:hover {
+  text-decoration: underline;
+}
 .header a:hover {
   color: black;
   background-color: white;
@@ -39,6 +41,10 @@ a {
   color: blue;
   text-decoration: none;
   font-weight: 500;
+  display: inline-block;
+}
+li {
+  list-style: none;
 }
 label {
   color: gray;
@@ -51,6 +57,9 @@ label {
 }
 .justify-center {
   justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .h-200 {
   height: 200px;

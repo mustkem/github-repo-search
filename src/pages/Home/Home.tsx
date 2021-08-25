@@ -8,27 +8,27 @@ import RepoItem from "../../components/RepoItem";
 
 import Style from "./style/home.module.css";
 
-function Home() {
+const Home = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const repos = useSelector((state) => state.repos);
+  const repos = useSelector((state: any) => state.repos);
 
-  const handleDeleteRepo = (id) => {
+  const handleDeleteRepo = (id: string) => {
     dispatch(deleteRepo(id));
   };
 
   return (
     <div className="container">
       <div className="row">
-        <div className="col-6">
+        <div className="col-md-6 col-xs-12">
           <Search />
         </div>
-        <div className="col-6">
+        <div className="col-md-6 col-xs-12">
           <div>
-            <h2 style={{ padding: "25px 0" }}>My selected Repos</h2>
+            <h2 className={Style.title}>My selected Repos</h2>
             {repos.data?.length > 0 && (
               <ul className={Style.list}>
-                {repos.data.map((item) => {
+                {repos.data.map((item: any) => {
                   if (!item) return null;
                   return (
                     <RepoItem
@@ -49,6 +49,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

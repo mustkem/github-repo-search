@@ -6,11 +6,22 @@ import RepoItem from "../../../components/RepoItem";
 import { addRepo } from "../../../store/actions";
 
 import useSearch from "../../../components/useSearch";
+import Style from "../style/home.module.css";
 
-function Search() {
-  const [query, setQuery] = useState("");
-  const [actionQuery, setAtionQuery] = useState("");
-  const [timeoutInstance, setTimeoutInstance] = useState(null);
+const getIsAdded = (id: string, repos: any) => {
+  var i;
+  for (i = 0; i < repos.length; i++) {
+    if (repos[i].id === id) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const Search = (): JSX.Element => {
+  const [query, setQuery] = useState<string>("");
+  const [actionQuery, setAtionQuery] = useState<string>("");
+  const [timeoutInstance, setTimeoutInstance] = useState<any>(null);
 
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -18,23 +29,13 @@ function Search() {
 
   const dispatch = useDispatch();
 
-  let repos = useSelector((state) => state.repos.data);
+  let repos = useSelector((state: any) => state.repos.data);
 
-  const getIsAdded = (id) => {
-    var i;
-    for (i = 0; i < repos.length; i++) {
-      if (repos[i].id === id) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const handleAddRepo = (item) => {
+  const handleAddRepo = (item: any) => {
     dispatch(addRepo(item));
   };
 
-  const scrollRef = useRef();
+  const scrollRef: any = useRef();
   const lastElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -49,7 +50,7 @@ function Search() {
     [loading, hasMore]
   );
 
-  function handleSearch(e) {
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setAtionQuery(e.target.value);
   }
 
@@ -65,17 +66,17 @@ function Search() {
 
   return (
     <div>
-      <h2 style={{ padding: "25px 0" }}>Search Repos</h2>
+      <h2 className={Style.title}>Search Repos</h2>
       <Form.Control
         type="search"
         placeholder="Search Repos"
         value={actionQuery}
         onChange={handleSearch}
       />
-      <div style={{ height: 400, overflow: "auto" }}>
+      <div className={Style.container}>
         <div>
-          {items.map((item, index) => {
-            const isAdded = getIsAdded(item.id);
+          {items.map((item: any, index) => {
+            const isAdded = getIsAdded(item.id, repos);
             if (items.length === index + 1) {
               return (
                 <RepoItem
@@ -83,7 +84,6 @@ function Search() {
                   isAdded={isAdded}
                   canAdd
                   item={item}
-                  key={item.id}
                   addRepo={handleAddRepo}
                 />
               );
@@ -99,7 +99,7 @@ function Search() {
               );
             }
           })}
-          <div style={{ padding: 10, textAlign: "center", minHeight: 50 }}>
+          <div className={Style.loading}>
             {loading && "Loading..."}
             {error && "Error"}
             {!loading &&
@@ -111,6 +111,6 @@ function Search() {
       </div>
     </div>
   );
-}
+};
 
 export default Search;

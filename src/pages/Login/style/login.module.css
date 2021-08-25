@@ -1,0 +1,43 @@
+.container {
+  min-height: 300px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 15px 0;
+}
+
+.link {
+  font-size: 16px;
+  padding: 10px 15px;
+  color: white;
+  background-color: #24292e;
+  border-radius: 4px;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.link:hover {
+  color: white;
+}
+.wrap {
+  height: 250px;
+  min-width: 320px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 10px;
+  text-align: center;
+}
+
+.label {
+  color: gray;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+}

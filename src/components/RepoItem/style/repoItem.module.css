@@ -3,6 +3,12 @@
   border-bottom: 1px solid #ebedef;
 }
 
+@media (max-width: 768px) {
+  .item {
+    padding: 12px 0;
+  }
+}
+
 .info {
   display: flex;
 }
@@ -19,12 +25,16 @@
 }
 .smallLink {
   font-size: 15px;
-  padding: 7px;
-  margin: 0 15px;
+  margin-right: 15px;
   display: inline-block;
 }
 
-.wrap {
+.link {
+  word-break: break-all;
+  display: inline-block;
+}
+.action {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
