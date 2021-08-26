@@ -2,15 +2,13 @@
 
 # 🚀 Table of Contents
 
-## 1 Getting Started with App
+## Getting Started with App
 
 ## Library Framwork Used
 
 ## What's inside?
 
 ## How to build
-
----
 
 # Getting Started with App
 
@@ -59,15 +57,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 # Library Framwork Used
 
-### React
+## React
 
 React library is used for frontend components. Use of Functional component is encouraged however you can use class components for rare cases.
 
-### Typescript
+## Typescript
 
 For static types to Javascript code
 
-### axios
+## axios
 
 Axios is used as http client instance because of its out of the box offerings and some extra methods over native fetch. A centralised instance is used, you can add headers from single place using this file and handle 401, 404, 500, etc errors here.
 
@@ -129,15 +127,15 @@ Is used to have the ablity to dispatch async function. Use this for api calling 
 
 ## /src
 
--This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
--A store is created for state management, store will have multiple edux reducers and they are combined using combineReducers. folow the same folder structure and design for adding new reducers to it.
--Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and stat calling the api using it.
--Add common components inside /src/cmponents directory. This directory do have the common component used across diffrent pages and app.
--For styling CSS modules are used for below benifits
-Using CSS modules avoid namespace collision for CSS classes
-You can use the same CSS class in multiple CSS files
-You can confidently update any CSS file without worrying about affecting other pages
-Using CSS Modules generates random CSS classes when displayed in the browser and css will not override/overlap.
+- This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
+- A store is created for state management, store will have multiple edux reducers and they are combined using combineReducers. folow the same folder structure and design for adding new reducers to it.
+- Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and stat calling the api using it.
+- Add common components inside /src/cmponents directory. This directory do have the common component used across diffrent pages and app.
+- For styling CSS modules are used for below benifits
+  Using CSS modules avoid namespace collision for CSS classes.
+  You can use the same CSS class in multiple CSS files.
+  You can confidently update any CSS file without worrying about affecting other pages.
+  Using CSS Modules generates random CSS classes when displayed in the browser and css will not override/overlap.
 
 - Folder structor of a component
 
@@ -152,11 +150,11 @@ Using CSS Modules generates random CSS classes when displayed in the browser and
 
 Follow above folder signature for new pages/components.
 
--Keep your constants inside config file. This config will import the constants from .env file.
+- Keep your constants inside config file. This config will import the constants from .env file.
 
--React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
+- React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
 
--connect is used over useSelector (react-redux)
+- connect is used over useSelector (react-redux)
 
 "Inner" components themselves are simpler and easier to test
 Option to include redux in your component tests
