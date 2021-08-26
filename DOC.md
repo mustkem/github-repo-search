@@ -4,7 +4,7 @@
 
 ## Getting Started with App
 
-## Library Framwork Used
+## Library Framework Used
 
 ## What's inside?
 
@@ -67,23 +67,23 @@ For static types to Javascript code
 
 ## axios
 
-Axios is used as http client instance because of its out of the box offerings and some extra methods over native fetch. A centralised instance is used, you can add headers from single place using this file and handle 401, 404, 500, etc errors here.
+Axios is used as http client instance because of it's out of the box offerings and some extra methods over native fetch. A centralised instance is used, you can add headers from a single place using this file and handle 401, 404, 500, etc errors here.
 
 ## react-bootstrap
 
-CSS framwork for readymade UI comonents is used
+CSS framwork for readymade UI comonents is used.
 
 ## query-string
 
-For parsing and stringifying the query/params
+For parsing and stringifying the query/params.
 
 ## react-content-loader
 
-Use this loader to show inside your compnent for data loading duration. You can customize the iew of loaded.
+Use this loader to show inside your compnent for data loading duration. You can customize the view of loader.
 
 ## redux
 
-State container is used for common state management. Only common data should be moved to it. For other data you can keep api calling logic within component and can keep your data there only because it's more momery efficient, data is one time use, easy cleanup of unused data.
+State container is used for common state management. Only common data should be moved to it. You can cal API within component itself if the data is not shared among other components/pages. If you feel some data is required in multiple components then move it to redux. A hybrid approach is used for data storage. Keep the data inside component(one time use) and other one is keep it in redux(common data).
 
 ## react-router-dom
 
@@ -91,7 +91,7 @@ Is used for routing. Add your routing for new pages/screen in Routing.tsx file.
 
 ## redux-persist
 
-Is used to persist data on refresh of page. To allow redux persist keep your data, use blacklist, whitelist config. You check store.js file configuration
+Is used to persist data on page refresh. To allow `redux persist` keep your data, use blacklist, whitelist config. You can check store.js configuration file for it to manage.
 
 ## redux-thunk
 
@@ -128,10 +128,10 @@ Is used to have the ablity to dispatch async function. Use this for api calling 
 ## /src
 
 - This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
-- A store is created for state management, store will have multiple edux reducers and they are combined using combineReducers. folow the same folder structure and design for adding new reducers to it.
+- A store is created for state management, store will have multiple redux reducers and they are combined together using combineReducers. folow the same folder structure and design for adding new reducers to it.
 - Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and stat calling the api using it.
-- Add common components inside /src/cmponents directory. This directory do have the common component used across diffrent pages and app.
-- For styling CSS modules are used for below benifits
+- Add common components inside /src/cmponents directory. This directory do have the common components used across diffrent pages insde app.
+- For styling CSS modules are used for below benifits--
   Using CSS modules avoid namespace collision for CSS classes.
   You can use the same CSS class in multiple CSS files.
   You can confidently update any CSS file without worrying about affecting other pages.
@@ -154,9 +154,11 @@ Follow above folder signature for new pages/components.
 
 - React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
 
-- connect is used over useSelector (react-redux)
+#### connect is used over useSelector, useDispatch (react-redux)
 
-"Inner" components themselves are simpler and easier to test.
-Option to include redux in your component tests.
-Better performance optimizations by default.
-Good separation of concerns.
+- Good separation of concerns.
+- Easy handeling of props/data
+- "Inner" components themselves are simpler and easier to test.
+- Option to include redux in your component tests.
+- Better performance optimizations by default.
+
