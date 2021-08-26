@@ -12,10 +12,12 @@ const Commit = memo(
     return (
       <li>
         <a href={html_url} target="_blank" rel="noreferrer">
-          <div>{message}</div>
-          <span>{name}</span>
-          <span>{date}</span>
+          {message}
         </a>
+        <div>
+          <span>{name} </span>
+          <span>{date && new Date(date).toLocaleDateString()}</span>
+        </div>
       </li>
     );
   }

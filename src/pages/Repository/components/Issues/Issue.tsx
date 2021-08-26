@@ -11,10 +11,12 @@ const Issue = memo(
     return (
       <li>
         <a href={html_url} target="_blank" rel="noreferrer">
-          <div>{title}</div>
-          <span>{user}</span>
-          <span>{state}</span>
+          {title}
         </a>
+        <div>
+          <span>{user} </span>
+          <strong>Status: {state}</strong>
+        </div>
       </li>
     );
   }

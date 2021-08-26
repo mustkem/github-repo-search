@@ -63,7 +63,7 @@ const Search = ({ addRepo, repos }: SearchProps): JSX.Element => {
   }, [actionQuery]);
 
   return (
-    <div>
+    <>
       <h2 className={Style.title}>Search Repos</h2>
       <Form.Control
         type="search"
@@ -72,43 +72,41 @@ const Search = ({ addRepo, repos }: SearchProps): JSX.Element => {
         value={actionQuery}
         onChange={handleSearch}
       />
-      <div className={Style.container}>
-        <div>
-          {items.map((item: any, index) => {
-            const isAdded = getIsAdded(item.id, repos.data);
+      <ul className={Style.container}>
+        {items.map((item: any, index) => {
+          const isAdded = getIsAdded(item.id, repos.data);
 
-            if (items.length === index + 1) {
-              return (
-                <RepoItem
-                  ref={lastElementRef}
-                  isAdded={isAdded}
-                  canAdd
-                  item={item}
-                  addRepo={handleAddRepo}
-                />
-              );
-            } else {
-              return (
-                <RepoItem
-                  isAdded={isAdded}
-                  canAdd
-                  item={item}
-                  key={item.id}
-                  addRepo={handleAddRepo}
-                />
-              );
-            }
-          })}
-          <div className={Style.loading}>
-            {loading && "Loading..."}
-            {error && "Error"}
-            {!loading && !error && items.length === 0 && (
-              <div id="search-repo-place">Enter Repository name to search</div>
-            )}
-          </div>
+          if (items.length === index + 1) {
+            return (
+              <RepoItem
+                ref={lastElementRef}
+                isAdded={isAdded}
+                canAdd
+                item={item}
+                addRepo={handleAddRepo}
+              />
+            );
+          } else {
+            return (
+              <RepoItem
+                isAdded={isAdded}
+                canAdd
+                item={item}
+                key={item.id}
+                addRepo={handleAddRepo}
+              />
+            );
+          }
+        })}
+        <div className={Style.loading}>
+          {loading && "Loading..."}
+          {error && "Error"}
+          {!loading && !error && items.length === 0 && (
+            <div id="search-repo-place">Enter Repository name to search</div>
+          )}
         </div>
-      </div>
-    </div>
+      </ul>
+    </>
   );
 };
 
