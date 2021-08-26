@@ -156,7 +156,7 @@ Follow above folder signature for new pages/components.
 
 - connect is used over useSelector (react-redux)
 
-"Inner" components themselves are simpler and easier to test
-Option to include redux in your component tests
-Better performance optimizations by default
-Good separation of concerns
+"Inner" components themselves are simpler and easier to test.
+Option to include redux in your component tests.
+Better performance optimizations by default.
+Good separation of concerns.
