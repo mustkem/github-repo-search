@@ -154,7 +154,8 @@ Follow above folder signature for new pages/components.
 
 - React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file inside your component folder and write your test cases.
 
-#### Top level connect is used over component level connect/useSelector, useDispatch (react-redux)
+#### Top level connect is used over component level connect/useSelector, useDispatch (react-redux) 
+This approach is scalable, provide improved readability, controlled components, and some more points are mentioned below:
 
 - Good separation of concerns.
 - Easy handeling of props/data
