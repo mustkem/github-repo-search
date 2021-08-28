@@ -154,11 +154,11 @@ Follow above folder signature for new pages/components.
 
 - React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
 
-#### connect is used over useSelector, useDispatch (react-redux)
+#### Top level connect is used over component level connect/useSelector, useDispatch (react-redux)
 
 - Good separation of concerns.
 - Easy handeling of props/data
-- "Inner" components themselves are simpler and easier to test.
+- "Inner" components themselves are simpler and easier to test. Good code readability.
 - Option to include redux in your component tests.
 - Better performance optimizations by default.
 
