@@ -83,7 +83,7 @@ Use this loader to show inside your compnent for data loading duration. You can 
 
 ## redux
 
-State container is used for common state management. Only common data should be moved to it. You can cal API within component itself if the data is not shared among other components/pages. If you feel some data is required in multiple components then move it to redux. A hybrid approach is used for data storage. Keep the data inside component(one time use) and other one is keep it in redux(common data).
+State management redux container is used for common data. Only common data should be moved to it. You can cal API within component itself if the data is not shared among other components/pages. If you feel some data is required in multiple components then move it to redux. A hybrid approach is used for data storage within app. Keep the data inside component(one time use) and other one is keep it in redux(common data).
 
 ## react-router-dom
 
@@ -91,7 +91,7 @@ Is used for routing. Add your routing for new pages/screen in Routing.tsx file.
 
 ## redux-persist
 
-Is used to persist data on page refresh. To allow `redux persist` keep your data, use blacklist, whitelist config. You can check store.js configuration file for it to manage.
+Is used to persist data on page refresh. To allow `redux persist` keep your data, use blacklist, whitelist config. You can check store.js file for `redux persist` configuration settings.
 
 ## redux-thunk
 
@@ -129,8 +129,8 @@ Is used to have the ablity to dispatch async function. Use this for api calling 
 
 - This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
 - A store is created for state management, store will have multiple redux reducers and they are combined together using combineReducers. folow the same folder structure and design for adding new reducers to it.
-- Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and stat calling the api using it.
-- Add common components inside /src/cmponents directory. This directory do have the common components used across diffrent pages insde app.
+- Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and start calling the api using it.
+- Add common components inside /src/cmponents directory. This directory has the common components which are used in diffrent pages inside application.
 - For styling CSS modules are used for below benifits--
   Using CSS modules avoid namespace collision for CSS classes.
   You can use the same CSS class in multiple CSS files.
@@ -152,7 +152,7 @@ Follow above folder signature for new pages/components.
 
 - Keep your constants inside config file. This config will import the constants from .env file.
 
-- React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
+- React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file inside your component folder and write your test cases.
 
 #### Top level connect is used over component level connect/useSelector, useDispatch (react-redux)
 
