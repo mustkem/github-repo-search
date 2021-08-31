@@ -1,6 +1,7 @@
 import React from "react";
-import Commit from "./Commit";
-import httpInstance from "../../../../helpers/httpClient";
+import Commit from "../Commit";
+import axios from "axios";
+import config from "../../../../config";
 
 import Style from "../../style/repo.module.css";
 
@@ -14,26 +15,26 @@ const PER_PAGE_ITEMS: number = 5;
 const Commits = ({ owner, name }: CommitsProps): JSX.Element => {
   const [commits, setCommits] = React.useState([]);
   React.useEffect(() => {
-    httpInstance({
-      method: "get",
-      url: `/repos/${owner}/${name}/commits`,
-      headers: {
-        accept: "application/vnd.github.v3+json",
-      },
-      params: {
-        per_page: PER_PAGE_ITEMS, // latest 5 only
-      },
-    })
-      .then((res) => {
+    axios
+      .get(`${config.API_URL}repos/${owner}/${name}/commits`, {
+        params: {
+          per_page: PER_PAGE_ITEMS, // latest 5 only
+        },
+        headers: {
+          authorization: `token ${localStorage.getItem("access_token_github")}`,
+        },
+      })
+      .then(function (res) {
         setCommits(res.data);
       })
-      .catch((err) => {
+      .catch(function (err) {
+        // handle error
         console.log(err);
       });
-  }, []);
+  }, [owner, name]);
 
   return (
-    <>
+    <div data-testid="commits">
       <h3>Latest Commits</h3>
       {commits?.length > 0 && (
         <ul className={Style.list}>
@@ -52,7 +53,7 @@ const Commits = ({ owner, name }: CommitsProps): JSX.Element => {
       )}
 
       {commits?.length === 0 && <h4>No Records available</h4>}
-    </>
+    </div>
   );
 };
 

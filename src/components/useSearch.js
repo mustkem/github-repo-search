@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import httpInstance from "../helpers/httpClient";
+import config from "../config";
 
 export default function useSearch(query, pageNumber) {
   const [loading, setLoading] = useState(false);
@@ -20,11 +19,12 @@ export default function useSearch(query, pageNumber) {
     setLoading(true);
     setError(false);
     let cancel;
-    httpInstance({
+    axios({
       method: "GET",
-      url: `/search/repositories`,
+      url: `${config.API_URL}search/repositories`,
       headers: {
         accept: "application/vnd.github.v3+json",
+        authorization: `token ${localStorage.getItem("access_token_github")}`,
       },
       params: { q: query, page: pageNumber },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),

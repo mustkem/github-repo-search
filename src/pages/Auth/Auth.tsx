@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { parse } from "query-string";
-import httpInstance from "../../helpers/httpClient";
+import axios from "axios";
 
 import { onFetchUser } from "../../store/actions";
 
@@ -14,7 +14,7 @@ const Auth = (): JSX.Element => {
     const query = parse(location.search);
     const code = query.code;
 
-    httpInstance({
+    axios({
       method: "post",
       url: `https://github-auth-api.herokuapp.com/authenticate`,
       data: {

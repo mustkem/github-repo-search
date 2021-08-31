@@ -1,6 +1,7 @@
 import React from "react";
-import Issue from "./Issue";
-import httpInstance from "../../../../helpers/httpClient";
+import Issue from "../Issue";
+import axios from "axios";
+import config from "../../../../config";
 
 import Style from "../../style/repo.module.css";
 
@@ -14,26 +15,26 @@ type IssuesProps = {
 const Issues = ({ owner, name }: IssuesProps): JSX.Element => {
   const [issues, setIssues] = React.useState([]);
   React.useEffect(() => {
-    httpInstance({
-      method: "get",
-      url: `/repos/${owner}/${name}/issues`,
-      headers: {
-        accept: "application/vnd.github.v3+json",
-      },
-      params: {
-        per_page: PER_PAGE_ITEMS, // latest 5 only
-      },
-    })
+    axios
+      .get(`${config.API_URL}repos/${owner}/${name}/issues`, {
+        headers: {
+          accept: "application/vnd.github.v3+json",
+          authorization: `token ${localStorage.getItem("access_token_github")}`,
+        },
+        params: {
+          per_page: PER_PAGE_ITEMS, // latest 5 only
+        },
+      })
       .then((res) => {
         setIssues(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [owner, name]);
 
   return (
-    <>
+    <div data-testid="issues">
       <h3>Latest Issues</h3>
       {issues?.length > 0 && (
         <ul className={Style.list}>
@@ -51,7 +52,7 @@ const Issues = ({ owner, name }: IssuesProps): JSX.Element => {
         </ul>
       )}
       {issues?.length === 0 && <h4>No Records available</h4>}
-    </>
+    </div>
   );
 };
 

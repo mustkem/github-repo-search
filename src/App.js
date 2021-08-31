@@ -15,8 +15,10 @@ function App() {
   );
 
   React.useEffect(() => {
-    dispatch(fetchUser());
-  }, [fetchUser]);
+    dispatch(fetchUser()).catch(() => {
+      //error
+    });
+  }, [dispatch]);
 
   return (
     <div className="app">

@@ -72,13 +72,14 @@ const Search = ({ addRepo, repos }: SearchProps): JSX.Element => {
         value={actionQuery}
         onChange={handleSearch}
       />
-      <ul className={Style.container}>
+      <ul data-testid="search-list" className={Style.container}>
         {items.map((item: any, index) => {
           const isAdded = getIsAdded(item.id, repos.data);
 
           if (items.length === index + 1) {
             return (
               <RepoItem
+                key={item.id}
                 ref={lastElementRef}
                 isAdded={isAdded}
                 canAdd

@@ -4,7 +4,8 @@ import {
   FETCH_USER,
   FETCH_USER_SUCCESS,
 } from "../types";
-import httpInstance from "../../helpers/httpClient";
+import axios from "axios";
+import config from "../../config";
 
 export const onAddRepo = (message) => ({
   type: ADD_REPO,
@@ -42,10 +43,12 @@ export const onFetchUser = (payload) => ({
 export const fetchUser = () => (dispatch) => {
   dispatch(onFetchUserInit());
   return new Promise((res, rej) => {
-    httpInstance({
-      method: "get",
-      url: "/user",
-    })
+    axios
+      .get(`${config.API_URL}user`, {
+        headers: {
+          authorization: `token ${localStorage.getItem("access_token_github")}`,
+        },
+      })
       .then(function (response) {
         dispatch(onFetchUser({ isAuthenticated: true, ...response.data }));
         res(response);

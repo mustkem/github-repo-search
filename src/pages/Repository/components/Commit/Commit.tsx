@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
 type CommitProps = {
   html_url: string;
@@ -15,8 +15,10 @@ const Commit = memo(
           {message}
         </a>
         <div>
-          <span>{name} </span>
-          <span>{date && new Date(date).toLocaleDateString()}</span>
+          <span data-testid="name">{name}</span>&nbsp;
+          <span data-testid="date">
+            {date && new Date(date).toLocaleDateString()}
+          </span>
         </div>
       </li>
     );

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
 type IssueProps = {
   html_url: string;
@@ -14,7 +14,7 @@ const Issue = memo(
           {title}
         </a>
         <div>
-          <span>{user} </span>
+          <span>{user}</span>&nbsp;
           <strong>Status: {state}</strong>
         </div>
       </li>

@@ -67,7 +67,7 @@ For static types to Javascript code
 
 ## axios
 
-Axios is used as http client instance because of it's out of the box offerings and some extra methods over native fetch. A centralised instance is used, you can add headers from a single place using this file and handle 401, 404, 500, etc errors here.
+Axios is used as http client instance because of it's out of the box offerings and some extra methods over native fetch.
 
 ## react-bootstrap
 
@@ -129,7 +129,6 @@ Is used to have the ablity to dispatch async function. Use this for api calling 
 
 - This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
 - A store is created for state management, store will have multiple redux reducers and they are combined together using combineReducers. folow the same folder structure and design for adding new reducers to it.
-- Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and stat calling the api using it.
 - Add common components inside /src/cmponents directory. This directory do have the common components used across diffrent pages insde app.
 - For styling CSS modules are used for below benifits--
   Using CSS modules avoid namespace collision for CSS classes.
@@ -152,7 +151,7 @@ Follow above folder signature for new pages/components.
 
 - Keep your constants inside config file. This config will import the constants from .env file.
 
-- React Testing libray is used for unit testing. Main/important test cases like adding repo, deleting Repo, listing repo, using search input cell are implemented. Create [Name].test.js file and write your test cases in it.
+- React Testing libray is used for unit testing. It allows to test component without relying on implementation details.
 
 #### connect is used over useSelector, useDispatch (react-redux)
 
@@ -161,4 +160,3 @@ Follow above folder signature for new pages/components.
 - "Inner" components themselves are simpler and easier to test.
 - Option to include redux in your component tests.
 - Better performance optimizations by default.
-
