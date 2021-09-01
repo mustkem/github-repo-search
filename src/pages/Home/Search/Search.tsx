@@ -72,41 +72,43 @@ const Search = ({ addRepo, repos }: SearchProps): JSX.Element => {
         value={actionQuery}
         onChange={handleSearch}
       />
-      <ul data-testid="search-list" className={Style.container}>
-        {items.map((item: any, index) => {
-          const isAdded = getIsAdded(item.id, repos.data);
+      <div className={Style.container}>
+        <ul data-testid="search-list">
+          {items.map((item: any, index) => {
+            const isAdded = getIsAdded(item.id, repos.data);
 
-          if (items.length === index + 1) {
-            return (
-              <RepoItem
-                key={item.id}
-                ref={lastElementRef}
-                isAdded={isAdded}
-                canAdd
-                item={item}
-                addRepo={handleAddRepo}
-              />
-            );
-          } else {
-            return (
-              <RepoItem
-                isAdded={isAdded}
-                canAdd
-                item={item}
-                key={item.id}
-                addRepo={handleAddRepo}
-              />
-            );
-          }
-        })}
-        <div className={Style.loading}>
+            if (items.length === index + 1) {
+              return (
+                <RepoItem
+                  key={item.id}
+                  ref={lastElementRef}
+                  isAdded={isAdded}
+                  canAdd
+                  item={item}
+                  addRepo={handleAddRepo}
+                />
+              );
+            } else {
+              return (
+                <RepoItem
+                  isAdded={isAdded}
+                  canAdd
+                  item={item}
+                  key={item.id}
+                  addRepo={handleAddRepo}
+                />
+              );
+            }
+          })}
+        </ul>
+        <div data-testid="info" className={Style.loading}>
           {loading && "Loading..."}
           {error && "Error"}
           {!loading && !error && items.length === 0 && (
             <div id="search-repo-place">Enter Repository name to search</div>
           )}
         </div>
-      </ul>
+      </div>
     </>
   );
 };

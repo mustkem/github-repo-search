@@ -14,20 +14,24 @@ const RepoItem = memo(
     ): JSX.Element => {
       return (
         <li ref={externalRef} className={Style.item} aria-label="repo-item">
-          <Link className={Style.link} to={`/repos/${item.full_name}`}>
+          <Link
+            data-testid="name"
+            className={Style.link}
+            to={`/repos/${item.full_name}`}
+          >
             {item.full_name}
           </Link>
           <div className={Style.info}>
             {item.language && (
               <div className={Style.section}>
                 <label className={Style.title}>Language</label>
-                <span>{item.language}</span>
+                <span data-testid="language">{item.language}</span>
               </div>
             )}
             {item.owner?.login && (
               <div className={Style.section}>
                 <label className={Style.title}>Owner</label>
-                <span>{item.owner?.login}</span>
+                <span data-testid="owner">{item.owner?.login}</span>
               </div>
             )}
           </div>
