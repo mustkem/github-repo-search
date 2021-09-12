@@ -1,77 +1,168 @@
-# Multi-choice home assignment
+### App is deployed and runing on https://super-github-repos.netlify.app/
 
-You can choose one of the following projects to implement. 
+# 🚀 Table of Contents
 
-## Home Automation
+## Getting Started with App
 
-Write a Single-Page JavaScript application (SPA) that is simulating house automation, that will allow remote clients (iPad, browser, web app etc) to monitor and control home appliances.
+## Library Framework Used
 
-For example, pressing a button on a control panel would visually:
-- Turn on/off a light;
-- Change the temperature (+/-);
-- Open/close the curtains;
-etc.
+## What's inside?
 
-Constraints:
-- The solution has to be *extensible* (there might be many rooms, with different numbers and sets of appliances)
-- The solution must be documented, so that we can develop our own additional controllers/components that react to events;
-- The application must have a HTTP-based API interaction. For example, the heating component retrieves the current temperature from the `server` and also sends the desired one back to the `server` via API.
-- You can use a static file with data for simplicity or mock the server data responses. If you choose to use a local server, make sure we know how run it locally
-- Use vanilla JS or framework of your choice. **We prefer React.js**
-- TypeScript is also acceptable.
-- It will be viewed in 2 major browsers of your choice.
+## How to build
 
+# Getting Started with App
 
-## SPA - Github Integration
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Write a Single Page Application (in JavaScript) that retrieves data from Github endpoints and displays it.
-The application will be a dashboard application, which will display statuses of the `selected` GitHub projects.
+## Environment
 
-The `selected` projects will be added/deleted by the user. To add a project, a user should be able to use search with project name. The list of the projects can be stored at local storage for the next visit.
+Nodejs
 
-Expected functionality:
-- Search and add new GitHub projects to the project list. Remove project from the project list.
-- List the projects in a single page. The list can contain some summaries (project description, project link etc.)
-- Display project details such as latest activities (last commits, last issues etc.) or general status (open PR count, open issue count etc.). Each project detail page should be bookmarked on its own.
+## Available Scripts
 
-Constraints:
-- The solution must be documented so that anyone can develop additional features on top of it. 
-- The documentation must include `how to build` section.
-- You have to supply both code and deployable package. You can deploy it to the GitHub pages or somewhere else.
-- Responsive design is a bonus.
-- We prefer React.js but feel free to use any other javascript framework.
+In the project directory, you can run:
 
-Resources:
-- https://developer.github.com
-- https://developer.github.com/v3/
-- https://developer.github.com/v4/
+### `npm install`
 
-------
+### `npm start`
 
-# Bonus Tasks
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Add your design decisions to DOC.md file.
-- Implement a Spring Boot, Node.js or Deno backend for 'Home Automation' assignment
-- Document the API in Swagger or API blueprint
-- Create an adapter for some existing IoT platform
-- Attach a Figma design
-- Write the logic in pure functional style
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-# Submission
+### `npm test`
 
-Please open a Pull/Merge request to this repository with everything you have prepared.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Make sure that the project is building correctly.
-Make sure that all tests are passing.
-Prepare necessary instructions to run your application in DOC.md file. Also include references for used libraries, frameworks, code snippets.
-If you have any questions, please send us an email, we'll get back to you as soon as possible.
-You have 7 days to complete this task.
+### `npm run build`
 
-# Evaluation Criterias
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- Code quality
-- Applying Best Practices and OOP principles
-- Correctness of the business logic and its compliance with the requirements
-- Unit Tests
-- Clean commit history (https://github.com/trein/dev-best-practices/wiki/Git-Commit-Best-Practices)
- 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### Deployment
+
+App is deployed and runing on https://super-github-repos.netlify.app/
+
+### Steps to deploy app - refer netlify section
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+# Library Framwork Used
+
+## React
+
+React library is used for frontend components. Use of Functional component is encouraged however you can use class components for rare cases.
+
+## Typescript
+
+For static types to Javascript code
+
+## axios
+
+Axios is used as http client instance because of it's out of the box offerings and some extra methods over native fetch.
+
+## react-bootstrap
+
+CSS framwork for readymade UI comonents is used.
+
+## query-string
+
+For parsing and stringifying the query/params.
+
+## react-content-loader
+
+Use this loader to show inside your compnent for data loading duration. You can customize the view of loader.
+
+## redux
+
+State management redux container is used for common data. Only common data should be moved to it. You can cal API within component itself if the data is not shared among other components/pages. If you feel some data is required in multiple components then move it to redux. A hybrid approach is used for data storage within app. Keep the data inside component(one time use) and other one is keep it in redux(common data).
+
+## react-router-dom
+
+Is used for routing. Add your routing for new pages/screen in Routing.tsx file.
+
+## redux-persist
+
+Is used to persist data on page refresh. To allow `redux persist` keep your data, use blacklist, whitelist config. You can check store.js file for `redux persist` configuration settings.
+
+## redux-thunk
+
+Is used to have the ablity to dispatch async function. Use this for api calling and async operations.
+
+# What's inside?
+
+.
+├── node_modules
+├── public
+├── src
+├── .gitignore
+└── DOC.md
+├── package-lock.json
+├── package.json
+└── README.md
+
+1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+
+2.  **`/public`**: This folder will have static content for your app.
+
+3.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+
+4.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+
+5.  **`DOC.md`** **`README.md`**: A text file containing useful reference information about your project.
+
+6.  **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+
+7.  **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+
+# How to build
+
+## /src
+
+- This directory will have frontend code. index.js is the root file that will bootstrap the app and this file will import the App component. App component will have Router.js file. You can add your routers in this file and start adding new screens/pages.
+- A store is created for state management, store will have multiple redux reducers and they are combined together using combineReducers. folow the same folder structure and design for adding new reducers to it.
+  <<<<<<< HEAD
+- # Add common components inside /src/cmponents directory. This directory do have the common components used across diffrent pages insde app.
+- Use centralised http client for api calling. You can import the instance from /src/helpers/httpClient and start calling the api using it.
+- Add common components inside /src/cmponents directory. This directory has the common components which are used in diffrent pages inside application.
+  > > > > > > > f410e9236cec6d3ae80cbec0fae32b7fd0734da0
+- For styling CSS modules are used for below benifits--
+  Using CSS modules avoid namespace collision for CSS classes.
+  You can use the same CSS class in multiple CSS files.
+  You can confidently update any CSS file without worrying about affecting other pages.
+  Using CSS Modules generates random CSS classes when displayed in the browser and css will not override/overlap.
+
+- Folder structor of a component
+
+├── Home
+├── index
+├── components
+-├── Banner
+-└── Features
+├── models
+└── styles
+├── Home.test.js
+
+Follow above folder signature for new pages/components.
+
+- Keep your constants inside config file. This config will import the constants from .env file.
+
+- React Testing libray is used for unit testing. It allows to test component without relying on implementation details. Create [Name].test.js file inside your component folder and write your test cases.
+
+#### Top level connect is used over component level connect/useSelector, useDispatch (react-redux)
+
+This approach is scalable, provide improved readability, controlled components, and some more points are mentioned below:
+
+- Good separation of concerns.
+- Easy handeling of props/data
+- "Inner" components themselves are simpler and easier to test. Good code readability.
+- Option to include redux in your component tests.
+- Better performance optimizations by default.
